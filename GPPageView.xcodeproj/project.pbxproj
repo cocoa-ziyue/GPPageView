@@ -14,11 +14,10 @@
 		A82D6BEF2227D988005B915D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82D6BED2227D988005B915D /* LaunchScreen.storyboard */; };
 		A82D6BFA2227D988005B915D /* PageViewDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6BF92227D988005B915D /* PageViewDemoTests.swift */; };
 		A82D6C052227D988005B915D /* PageViewDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C042227D988005B915D /* PageViewDemoUITests.swift */; };
-		A82D6C132227DA07005B915D /* BasePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C122227DA07005B915D /* BasePageViewController.swift */; };
+		A82D6C132227DA07005B915D /* GPPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C122227DA07005B915D /* GPPageViewController.swift */; };
 		A82D6C172227EA4A005B915D /* LPPageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C152227EA4A005B915D /* LPPageBar.swift */; };
 		A82D6C182227EA4A005B915D /* LPPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C162227EA4A005B915D /* LPPageItem.swift */; };
-		A82D6C5F222E5B6B005B915D /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C5E222E5B6B005B915D /* RootViewController.swift */; };
-		A82D6C61222E5E2A005B915D /* PageConsetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C60222E5E2A005B915D /* PageConsetManager.swift */; };
+		A82D6C61222E5E2A005B915D /* GPPageConsetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82D6C60222E5E2A005B915D /* GPPageConsetManager.swift */; };
 		AE7A7A9A10029DDBD8425936 /* Pods_GPPageViewTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D2B939AEEF32F8E8890A934 /* Pods_GPPageViewTests.framework */; };
 		B734C7EEFE4E71737255BC08 /* Pods_GPPageViewUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11E1DDE06A9590039A40767B /* Pods_GPPageViewUITests.framework */; };
 /* End PBXBuildFile section */
@@ -60,11 +59,10 @@
 		A82D6C002227D988005B915D /* GPPageViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GPPageViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82D6C042227D988005B915D /* PageViewDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewDemoUITests.swift; sourceTree = "<group>"; };
 		A82D6C062227D988005B915D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A82D6C122227DA07005B915D /* BasePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePageViewController.swift; sourceTree = "<group>"; };
+		A82D6C122227DA07005B915D /* GPPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPPageViewController.swift; sourceTree = "<group>"; };
 		A82D6C152227EA4A005B915D /* LPPageBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPageBar.swift; sourceTree = "<group>"; };
 		A82D6C162227EA4A005B915D /* LPPageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPageItem.swift; sourceTree = "<group>"; };
-		A82D6C5E222E5B6B005B915D /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		A82D6C60222E5E2A005B915D /* PageConsetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageConsetManager.swift; sourceTree = "<group>"; };
+		A82D6C60222E5E2A005B915D /* GPPageConsetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPPageConsetManager.swift; sourceTree = "<group>"; };
 		B5F5A26F76CFFB2E665A0575 /* Pods_GPPageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPPageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E63F18422B83C27E1E250C4C /* Pods-GPPageViewUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPPageViewUITests.release.xcconfig"; path = "Target Support Files/Pods-GPPageViewUITests/Pods-GPPageViewUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,7 +134,6 @@
 				A82D6C142227EA4A005B915D /* PageBar */,
 				A82D6BE42227D986005B915D /* AppDelegate.swift */,
 				A82D6BE62227D986005B915D /* ViewController.swift */,
-				A82D6C5E222E5B6B005B915D /* RootViewController.swift */,
 				A82D6BEB2227D988005B915D /* Assets.xcassets */,
 				A82D6BED2227D988005B915D /* LaunchScreen.storyboard */,
 				A82D6BF02227D988005B915D /* Info.plist */,
@@ -174,8 +171,8 @@
 		A82D6DC9222FCA7C005B915D /* PageView */ = {
 			isa = PBXGroup;
 			children = (
-				A82D6C60222E5E2A005B915D /* PageConsetManager.swift */,
-				A82D6C122227DA07005B915D /* BasePageViewController.swift */,
+				A82D6C60222E5E2A005B915D /* GPPageConsetManager.swift */,
+				A82D6C122227DA07005B915D /* GPPageViewController.swift */,
 			);
 			path = PageView;
 			sourceTree = "<group>";
@@ -190,7 +187,6 @@
 				4CD6ABC8F23D530B1904C004 /* Pods-GPPageViewUITests.debug.xcconfig */,
 				E63F18422B83C27E1E250C4C /* Pods-GPPageViewUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -419,13 +415,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A82D6C61222E5E2A005B915D /* PageConsetManager.swift in Sources */,
+				A82D6C61222E5E2A005B915D /* GPPageConsetManager.swift in Sources */,
 				A82D6C182227EA4A005B915D /* LPPageItem.swift in Sources */,
 				A82D6C172227EA4A005B915D /* LPPageBar.swift in Sources */,
-				A82D6C5F222E5B6B005B915D /* RootViewController.swift in Sources */,
 				A82D6BE72227D986005B915D /* ViewController.swift in Sources */,
 				A82D6BE52227D986005B915D /* AppDelegate.swift in Sources */,
-				A82D6C132227DA07005B915D /* BasePageViewController.swift in Sources */,
+				A82D6C132227DA07005B915D /* GPPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

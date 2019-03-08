@@ -64,7 +64,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         // Do any additional setup after loading the view, typically from a nib.
       
-        //加入header
+        title = "界面"
+        navigationController?.navigationBar.isTranslucent = false
+        
+        //加入headerView
         view.addSubview(headerView)
         
         //加入segment
@@ -73,13 +76,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         segmentItem.selectedItemIndex = 0
         segmentItem.setTitles(titles)
         
-        //加入vc
-        let pageVC = BasePageViewController.init(headView: headerView, hoverView: segmentItem, subViewCount:4)        //1
+        //加入分页VC，可直接使用，也可继承。
+        let pageVC = GPPageViewController.init(headView: headerView, hoverView: segmentItem, subViewCount:4)        //1
         addChild(pageVC)
         view.addSubview(pageVC.view)
         pageVC.configTableView(subViews: [table1,table2,table3,table4], selectIndex: 0)
 
-        //置前
+        //headerView，segment置前
         self.view.bringSubviewToFront(headerView)
         self.view.bringSubviewToFront(segmentItem)
     }

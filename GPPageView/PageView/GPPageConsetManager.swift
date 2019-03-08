@@ -8,8 +8,8 @@
 
 import UIKit
 
-class PageConsetManager: NSObject {
-    static let shared = PageConsetManager()       //单例
+class GPPageConsetManager: NSObject {
+    static let shared = GPPageConsetManager()       //单例
     var lastConsetY: CGFloat = 0.0      //上一次的滑动位置
     var valueChanged: Bool = false      //发生改变
     

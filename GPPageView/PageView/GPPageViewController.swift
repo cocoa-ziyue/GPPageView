@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 
-class BasePageViewController: UIViewController,UITableViewDelegate,UIScrollViewDelegate,LPPageBarDelegate {
+class GPPageViewController: UIViewController,UITableViewDelegate,UIScrollViewDelegate,LPPageBarDelegate {
     
     var hoverHeight: CGFloat = 0        //滑动到悬停的距离
     var tableConsetHeight: CGFloat = 0       //tableview下拉的距离
@@ -108,12 +108,12 @@ class BasePageViewController: UIViewController,UITableViewDelegate,UIScrollViewD
         visibleTableArray.append(view)
         self.mainScrollView.addSubview(view)
         view.delegate = self
-        if PageConsetManager.shared.lastConsetY == 0 {
-            PageConsetManager.shared.lastConsetY = -tableConsetHeight
+        if GPPageConsetManager.shared.lastConsetY == 0 {
+            GPPageConsetManager.shared.lastConsetY = -tableConsetHeight
         }
         view.frame = CGRect.init(x: mainScrollView.frame.width * CGFloat(currentIndex), y: 0, width: mainScrollView.frame.width, height: mainScrollView.frame.height)
         view.contentInset = UIEdgeInsets.init(top: tableConsetHeight, left: 0, bottom: 44+UIApplication.shared.statusBarFrame.height, right: 0)
-        view.setContentOffset(CGPoint.init(x: 0, y: PageConsetManager.shared.lastConsetY), animated: false)        
+        view.setContentOffset(CGPoint.init(x: 0, y: GPPageConsetManager.shared.lastConsetY), animated: false)        
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -128,7 +128,7 @@ class BasePageViewController: UIViewController,UITableViewDelegate,UIScrollViewD
             }
             
             //记录上次ConsetY
-            PageConsetManager.shared.lastConsetY = consetY
+            GPPageConsetManager.shared.lastConsetY = consetY
             
             for item in self.visibleTableArray {
                 if item != scrollView {

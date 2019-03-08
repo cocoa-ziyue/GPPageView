@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.frame = UIScreen.main.bounds
         window?.backgroundColor = UIColor.white
-        let nav = UINavigationController.init(rootViewController: RootViewController())
+        let nav = UINavigationController.init(rootViewController: ViewController())
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
         return true
