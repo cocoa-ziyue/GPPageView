@@ -1,6 +1,6 @@
 //
 //  BasePageViewController.swift
-//  GPPageView
+//  PageViewDemo
 //
 //  Created by cocoaziyue on 2019/2/28.
 //  Copyright © 2019年 cocoaziyue. All rights reserved.
@@ -16,6 +16,7 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
     var hoverView: LPPageBar       //外界传入的悬停的View
     var subViewCount: UInt = 0   //列表视图个数
     var tableArray: [UITableView] = []
+    var visibleTableArray: [UITableView] = []
     var currentIndex: Int = 0
     
     lazy var mainScrollView: UIScrollView = {
@@ -67,21 +68,27 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
         self.currentIndex = selectIndex
         self.hoverView.selectedItemIndex = selectIndex
         setTableViewDetail(view: subViews[selectIndex])
+        visibleTableArray.append(subViews[selectIndex])
     }
     
     private func setTableViewDetail(view: UITableView) {
+        visibleTableArray.append(view)
         self.mainScrollView.addSubview(view)
         view.delegate = self
         view.dataSource = self
+        if PageConsetManager.shared.lastConsetY == 0 {
+            PageConsetManager.shared.lastConsetY = -tableConsetHeight
+        }
         view.frame = CGRect.init(x: mainScrollView.frame.width * CGFloat(currentIndex), y: 0, width: mainScrollView.frame.width, height: mainScrollView.frame.height)
-        view.contentInset = UIEdgeInsets.init(top: tableConsetHeight, left: 0, bottom: 0, right: 0)
-        view.setContentOffset(CGPoint.init(x: 0, y: -tableConsetHeight), animated: false)
+        view.contentInset = UIEdgeInsets.init(top: tableConsetHeight, left: 0, bottom: 44+UIApplication.shared.statusBarFrame.height, right: 0)
+        view.setContentOffset(CGPoint.init(x: 0, y: PageConsetManager.shared.lastConsetY), animated: false)
         view.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "UITableViewCell")
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")
-        cell?.textLabel?.text = String.init(format: "%d", indexPath.row) 
+        cell?.textLabel?.text = String.init(format: "%d", indexPath.row)
         return cell ?? UITableViewCell.init()
     }
     
@@ -96,13 +103,19 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
             headView.frame.origin.y = headerConsetY
             hoverView.frame.origin.y = hoverHeight+headerConsetY
             
-            if hoverView.frame.origin.y <= CGFloat(64) {
-                hoverView.frame.origin.y = CGFloat(64)
+            if hoverView.frame.origin.y <= 0.0 {
+                hoverView.frame.origin.y = 0.0
             }
             
-            DispatchQueue.main.async {
-                for item in self.tableArray {
-                    if item != scrollView {
+            //记录上次ConsetY
+            PageConsetManager.shared.lastConsetY = consetY
+            
+            for item in self.visibleTableArray {
+                if item != scrollView {
+                    //其他tabelView的上滑不能超过hoverView(悬浮视图)的下方
+                    if consetY > -hoverView.frame.height {
+                        
+                    } else {
                         item.setContentOffset(CGPoint.init(x: 0, y: consetY),animated: false)
                     }
                 }
@@ -132,7 +145,7 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if mainScrollView == scrollView {
-           self.scrollViewDidEndScrollingAnimation(scrollView)
+            self.scrollViewDidEndScrollingAnimation(scrollView)
         }
     }
     

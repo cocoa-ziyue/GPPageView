@@ -14,12 +14,14 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         title = "界面"
-        // a
+        // addChildVC
         let vc = ViewController()
         addChild(vc)
-        
         view.addSubview(vc.view)
+        
+        navigationController?.navigationBar.isTranslucent = false
     }
     
 

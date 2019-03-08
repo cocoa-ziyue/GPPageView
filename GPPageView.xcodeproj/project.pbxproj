@@ -113,7 +113,6 @@
 				A82D6BEB2227D988005B915D /* Assets.xcassets */,
 				A82D6BED2227D988005B915D /* LaunchScreen.storyboard */,
 				A82D6BF02227D988005B915D /* Info.plist */,
-				A82D6C60222E5E2A005B915D /* PageConsetManager.swift */,
 			);
 			path = GPPageView;
 			sourceTree = "<group>";
@@ -148,6 +147,7 @@
 		A82D6DC9222FCA7C005B915D /* PageView */ = {
 			isa = PBXGroup;
 			children = (
+				A82D6C60222E5E2A005B915D /* PageConsetManager.swift */,
 				A82D6C122227DA07005B915D /* BasePageViewController.swift */,
 			);
 			path = PageView;
