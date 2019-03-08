@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MJRefresh
 
-class BasePageViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,LPPageBarDelegate {
+class BasePageViewController: UIViewController,UITableViewDelegate,UIScrollViewDelegate,LPPageBarDelegate {
     
     var hoverHeight: CGFloat = 0        //滑动到悬停的距离
     var tableConsetHeight: CGFloat = 0       //tableview下拉的距离
@@ -18,10 +19,24 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
     var tableArray: [UITableView] = []
     var visibleTableArray: [UITableView] = []
     var currentIndex: Int = 0
+    var needHeaderPan: Bool = true      //是否需要添加头部滑动
     
     lazy var mainScrollView: UIScrollView = {
         let tempScrollView = UIScrollView.init(frame: self.view.bounds)
         return tempScrollView
+    }()
+    
+    lazy var mjHeader: MJRefreshNormalHeader = {
+        let mjHeader = MJRefreshNormalHeader.init()
+        mjHeader.refreshingBlock = {
+            
+        }
+        return mjHeader
+    }()
+    
+    lazy var panGes: UIPanGestureRecognizer = {
+        let panGes = UIPanGestureRecognizer.init(target: self, action: #selector(panHeaderAction(pan:)))
+        return panGes
     }()
     
     deinit {
@@ -63,6 +78,16 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if needHeaderPan {
+            headView.isUserInteractionEnabled = true
+            headView.addGestureRecognizer(panGes)       //添加手势
+        } else {
+            headView.removeGestureRecognizer(panGes)        //移除手势
+        }
+    }
+    
     func configTableView(subViews: [UITableView], selectIndex: Int) {
         self.tableArray = subViews
         self.currentIndex = selectIndex
@@ -71,31 +96,26 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
         visibleTableArray.append(subViews[selectIndex])
     }
     
+    func setRefreshHeader() {
+        
+    }
+    
+    @objc private func panHeaderAction(pan: UIPanGestureRecognizer) {
+        
+    }
+    
     private func setTableViewDetail(view: UITableView) {
         visibleTableArray.append(view)
         self.mainScrollView.addSubview(view)
         view.delegate = self
-        view.dataSource = self
         if PageConsetManager.shared.lastConsetY == 0 {
             PageConsetManager.shared.lastConsetY = -tableConsetHeight
         }
         view.frame = CGRect.init(x: mainScrollView.frame.width * CGFloat(currentIndex), y: 0, width: mainScrollView.frame.width, height: mainScrollView.frame.height)
         view.contentInset = UIEdgeInsets.init(top: tableConsetHeight, left: 0, bottom: 44+UIApplication.shared.statusBarFrame.height, right: 0)
-        view.setContentOffset(CGPoint.init(x: 0, y: PageConsetManager.shared.lastConsetY), animated: false)
-        view.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "UITableViewCell")
-        
+        view.setContentOffset(CGPoint.init(x: 0, y: PageConsetManager.shared.lastConsetY), animated: false)        
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")
-        cell?.textLabel?.text = String.init(format: "%d", indexPath.row)
-        return cell ?? UITableViewCell.init()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
-    }
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == tableArray[currentIndex] {
             let consetY = scrollView.contentOffset.y
@@ -156,4 +176,5 @@ class BasePageViewController: UIViewController,UITableViewDataSource,UITableView
     func pageBar(bar: LPPageBar, didSelectedItemAt index: Int, isReload: Bool) {
         mainScrollView.setContentOffset(CGPoint.init(x: UIScreen.main.bounds.width * CGFloat(index), y: 0), animated: true)
     }
+    
 }
