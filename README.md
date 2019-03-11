@@ -11,7 +11,7 @@
 
 
 ##### 关于作者
-- 博客地址 http://www.jianshu.com/p/c82a83fd400a ,如有疑问或有建议的地方，欢迎讨论。
+- 博客地址 https://www.jianshu.com/u/f0b11432b297 ,如有疑问或有建议的地方，欢迎讨论。
 
 
 ### License
