@@ -7,7 +7,7 @@
   
 ##### 效果图
 
-![效果图](https://github.com/liuzhongning/NNJaneBookView/blob/master/GIF/jianshu.gif)
+![效果图](https://github.com/cocoa-ziyue/GPPageView/blob/master/Jietu20190311-134542-HD.gif)
 
 
 ##### 关于作者
